@@ -12,4 +12,8 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("/dashboard")
+	public String dashboardView() {
+		return "dashboard";
+	}
 }
