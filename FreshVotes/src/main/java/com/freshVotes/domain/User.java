@@ -2,10 +2,16 @@
 
 package com.freshVotes.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,10 +23,12 @@ public class User {
 	private String username;
 	private String name;
 	private String password;
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="user" )
+	private Set<Authority> authorities = new HashSet<>();
 	
+	public User() {}
 	
 	public User(Long id, String username, String name, String password) {
-		super();
 		this.id = id;
 		this.username = username;
 		this.name = name;
@@ -29,6 +37,14 @@ public class User {
 	
 	
 	
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
+	}
+
 	public Long getId() {
 		return id;
 	}
