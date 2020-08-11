@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import com.freshVotes.domain.User;
 import com.freshVotes.service.UserService;
 
@@ -28,7 +29,17 @@ public class LoginController {
 	}
 	@PostMapping("/register")
 	String registerPost(User user) {
+		try {
 		userService.save(user);
+		}
+		catch(Exception ex) {
+			System.err.println(ex.getMessage());
+			//TODO
+			//dac znac frontendowi ze ma wyswitlic komunikat
+		}
+		
 		return "redirect:/login";
 	}
+	
+	
 }

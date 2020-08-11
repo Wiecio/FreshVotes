@@ -15,7 +15,12 @@ public class UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	public User save(User user){
+	public User save(User user) throws Exception{
+		if(userRepo.findByUsername(user.getUsername()) != null) 
+			throw new Exception("Username taken!");
+		
+			
+		
 		Authority authority = new Authority();
 		authority.setAutority("ROLE_USER");
 		authority.setUser(user);
