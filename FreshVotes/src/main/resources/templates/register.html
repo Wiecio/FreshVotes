@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
 <head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>Register</title>
 </head>
 <body>
-	<form action="" method="post">
-		<input type="hidden" th:name="${_csrf.parameterName}"
-		th:value="${_csrf.token}">
-		
-			Name: <input type="text" th:field="${user.name}"/><br>
-			Username: <input type="text" th:field="${user.username}"/><br>
-			Password: <input type="password" th:field="${user.password}"/><br>
-			Confirm Password: <input type="password" id="confirmPassword"/><br>
-			<button type="submit">Register</button>
-		
+	<div class="container">
+		<div class="card" style="margin-top: 1.5em;">
+			<h2 class="card-header">Create New Account</h2>
+			<div class="card-body">
+				<form action="" method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}">
+					<label for="name" class="col-12 col-sm-3 col-md-2 col-form-label">Name:</label>
+					<div class="col-12 col-sm-9 col-md-10">
+						<input type="text" th:field="${user.name}" placeholder="Name" class="form-control"/><br>
+					</div>
+					<label for="username" class="col-12 col-sm-3 col-md-2 col-form-label">Email:</label>
+					<div class="col-12 col-sm-9 col-md-10">
+						<input type="text" th:field="${user.username}" placeholder="example@gmail.com" class="form-control"/><br>
+					</div>
+					<label for="password" class="col-12 col-form-label">Password:</label>
+					<div class="col-12">
+						<input type="text" th:field="${user.password}" placeholder="password" class="form-control"/><br>
+					</div>
+					<label for="confirmPassword" class="col-12 col-form-label">Confirm Password:</label>
+					<div class="col-12">
+						<input type="text" placeholder="password" class="form-control" id="confirmPassword"/><br>
+					</div>
+					<div class="col-12">
+						<button type="submit" class="btn btn-lg btn-primary" >Register</button>
+					</div>
+					
 
-
-	</form>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
