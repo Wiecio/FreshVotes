@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 </head>
 <body>
 	<div th:fragment="headerElement" th:remove="tag">
-    	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-		
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+			crossorigin="anonymous"></script>
+
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+			crossorigin="anonymous">
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+			integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+			crossorigin="anonymous"></script>
+
 	</div>
 	<div th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,16 +28,38 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
+
 				<div class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
-							<span class="sr-only">(current)</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
-					</li>
-				</div>	
-			<button id="login" class="btn btn-lg btn-primary float-right">Login</button>		
+					<div sec:authorize="isAuthenticated()">
+						<li class="nav-item active"><a class="nav-link"
+							href="/dashboard">Dashboard <span class="sr-only">(current)</span>
+						</a></li>
+					</div>
+
+				</div>
+
+				<div class="navbar-nav ml-auto">
+					<div sec:authorize="isAuthenticated()">
+						<form action="/logout" method="post" class="float-right">
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+							<button type="submit" class=" btn btn-lg btn-secondary ">Logout</button>
+						</form>
+					</div>
+				</div>
+
+				<div sec:authorize="!isAuthenticated()">
+					<button id="loginBtn" 
+						class=" btn btn-lg btn-primary float-right">Login</button>
+					<script type="text/javascript">
+						$(function() {
+							$("#loginBtn").click(function() {
+								window.location.href = "/login";
+							});
+						});
+					</script>
+				</div>
+				
 			</div>
 		</nav>
 	</div>
