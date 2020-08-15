@@ -4,8 +4,11 @@
 </head>
 <body>
 	<div th:fragment="headerElement" th:remove="tag">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		
 	</div>
 	<div th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -16,7 +19,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav mr-auto">
+				<div class="navbar-nav mr-auto">
 					<li class="nav-item active"><a class="nav-link" href="#">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
@@ -24,9 +27,8 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
 					</li>
-				</ul>
-				<span class="navbar-text"> Navbar text with an inline element
-				</span>
+				</div>	
+			<button id="login" class="btn btn-lg btn-primary float-right">Login</button>		
 			</div>
 		</nav>
 	</div>
