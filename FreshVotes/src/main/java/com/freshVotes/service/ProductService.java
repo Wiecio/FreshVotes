@@ -1,5 +1,6 @@
 package com.freshVotes.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ProductService {
 	
 	public Product createProduct(User user) {
 		Product product = new Product();
+		product.setName("new product");
 		product.setPublished(false);
 		product.setUser(user);
 		user.getProducts().add(product);
@@ -41,6 +43,11 @@ public class ProductService {
 		}
 		
 		return product.get();
+	}
+	
+	public List<Product> findByUser(User user){
+		return productRepository.findByUser(user);
+		
 	}
 	
 }

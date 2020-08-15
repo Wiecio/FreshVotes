@@ -23,11 +23,6 @@ public class ProductController {
 	ProductService productService;
 	
 	
-	@GetMapping("/products")
-	String getProducts(ModelMap model) {
-		return "product";
-	}
-	
 	@PostMapping("/products") 
 	String createProduct(@AuthenticationPrincipal User user) {
 		
@@ -57,7 +52,7 @@ public class ProductController {
 		
 		productService.save(product);
 		
-		return "redirect:/products/{productId}";
+		return "redirect:/dashboard";
 	}
 	
 	
