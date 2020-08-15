@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script th:replace="fragments/header :: headerElement"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#login").click(function() {
+			window.location.href = "/login";
+		});
+	});
+</script>
 <meta charset="UTF-8">
-<title>Fresh Votes Home Page</title>
+<title>Fresh Votes|Home Page</title>
 </head>
 <body>
-<h1>Welcome to FreshVotes</h1>
+<div class="container" style="margin-top:1.5em;">
+	<div class="row">
+		<div class="col-8">
+			<h1>Welcome to FreshVotes!</h1>		
+		</div>
+		<div class="col-4">
+			<button id="login" class="btn btn-lg btn-primary float-right">Login</button>		
+		</div>
+	</div>
+
+</div>
 </body>
 </html>

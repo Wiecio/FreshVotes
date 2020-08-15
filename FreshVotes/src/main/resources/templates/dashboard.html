@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-	crossorigin="anonymous">
+<script th:replace="fragments/header :: headerElement"></script>
 <meta charset="UTF-8">
 <title>FreshVotes Dashboard</title>
 </head>
 <body>
-<div class="container" style="margin: 1.5em;">
+<div class="container " style="margin-top: 1.5em;">
 	<div class="row">
 		<div class="col-6">
 			<h1>Dashboard</h1>		
@@ -17,18 +14,30 @@
 		<div class="col-6">
 			<form action="/logout" method="post" class="float-right">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-				<button type="submit" class="btn btn-secondary ">Logout</button>
+				<button type="submit" class="btn btn-secondary">Logout</button>
 			</form>	
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-12">
-			<form action="/products" method="post">
-				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-				<button type="submit" class="btn btn-primary">Add New Product</button>
-			</form>
+	<div class="jumbotron" style="margin:1.5em;">
+		<div th:if="${products != null}">
+			<div class="row" style="margin-top:-2em;">
+				<h2>Products</h2>
+			</div>			
+			<div  class="row" th:each = "product: ${products}">			
+				<a th:href="@{/products/{productId}(productId=${product.id})}" th:text="${product.name}"></a>							
+			</div>
+	
 		</div>
 	</div>
+		<div class="row">
+			<div class="col-12">
+				<form action="/products" method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					<button type="submit" class="btn btn-primary">Add New Product</button>
+				</form>
+			</div>
+		</div>	
+	
 </div>
 </body>
 </html>
