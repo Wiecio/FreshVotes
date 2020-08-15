@@ -1,5 +1,7 @@
 package com.freshVotes.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,14 +30,14 @@ public class LoginController {
 		return "register";
 	}
 	@PostMapping("/register")
-	String registerPost(User user) {
+	String registerPost(User user,HttpServletResponse response,ModelMap model) {
 		try {
-		userService.save(user);
+		userService.create(user);
 		}
 		catch(Exception ex) {
 			System.err.println(ex.getMessage());
-			//TODO
-			//dac znac frontendowi ze ma wyswitlic komunikat
+			model.put("exception", ex);
+			return "/register";
 		}
 		
 		return "redirect:/login";

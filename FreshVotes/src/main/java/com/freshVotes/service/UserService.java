@@ -15,7 +15,11 @@ public class UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	public User save(User user) throws Exception{
+	public User save(User user) {
+		return userRepo.save(user);
+	}
+	
+	public User create(User user) throws Exception{
 		if(userRepo.findByUsername(user.getUsername()) != null) 
 			throw new Exception("Username taken!");
 		
@@ -29,7 +33,7 @@ public class UserService {
 		user.setPassword(encodedPassword);
 		user.getAuthorities().add(authority);
 		
-		userRepo.save(user);
+		user = userRepo.save(user);
 		
 		return user;
 	}

@@ -1,5 +1,3 @@
-
-
 package com.freshVotes.domain;
 
 import java.util.HashSet;
@@ -25,16 +23,8 @@ public class User {
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="user" )
 	private Set<Authority> authorities = new HashSet<>();
-	
-	public User() {}
-	
-	public User(Long id, String username, String name, String password) {
-		this.id = id;
-		this.username = username;
-		this.name = name;
-		this.password = password;
-	}
-	
+	@OneToMany(cascade= CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy="user")
+	private Set<Product> products = new HashSet<>();
 	
 	
 	public Set<Authority> getAuthorities() {
@@ -69,13 +59,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", name=" + name + ", password=" + password
 				+ ", authorities=" + authorities + "]";
 	}
-	
 	
 }
 
