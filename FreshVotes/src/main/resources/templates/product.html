@@ -6,6 +6,7 @@
 <title>FreshVotes Products</title>
 </head>
 <body>
+	<div th:replace="fragments/header :: header"></div>
 	<div class="container" style="margin-top: 1.5em;" th:if="${product} != null">
 		<form action="" method="post">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
