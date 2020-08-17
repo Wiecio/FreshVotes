@@ -16,7 +16,7 @@
 	<div class="jumbotron" style="margin:1.5em;">
 		<div th:if="${products != null}">
 			<div class="row" style="margin-top:-2em;">
-				<h2>Products</h2>
+				<h2>Your Products</h2>
 			</div>			
 			<div  class="row" th:each = "product: ${products}">			
 				<a th:href="@{/products/{productId}(productId=${product.id})}" th:text="${product.name}"></a>							

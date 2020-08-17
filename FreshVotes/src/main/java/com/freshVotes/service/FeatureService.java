@@ -1,5 +1,6 @@
 package com.freshVotes.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,29 @@ public class FeatureService {
 			feature = featureRepository.save(feature);
 			
 		}else {
-			throw new NotFoundException("Product with id: "+productId+"could not be found");
+			throw new NotFoundException("Product with id: "+productId+" could not be found");
 		}
 		
 		return feature;
+	}
+	
+	public List<Feature> findByProduct(Product product){
+		return featureRepository.findByProduct(product);
+	}
+	
+	public Feature findById(Long featureId) throws NotFoundException {
+		Optional<Feature> featureOpt = featureRepository.findById(featureId);
+		if(featureOpt.isPresent()) {
+			return featureOpt.get();
+		}
+		else {
+			throw new NotFoundException("Feature with id: "+featureId+" could not be found");
+		}
+	}
+
+	public Feature save(Feature feature) {
+		return featureRepository.save(feature);
+		
 	}
 	
 }

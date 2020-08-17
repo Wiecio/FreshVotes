@@ -37,17 +37,27 @@ public class ProductService {
 	}
 	
 	public Product findById(Long id) throws NotFoundException {
-		Optional<Product> product = productRepository.findById(id);
-		if(!product.isPresent()) {
+		Optional<Product> productOpt = productRepository.findById(id);
+		if(!productOpt.isPresent()) {
 			throw new NotFoundException("Product with id:"+id+" could not be found");
 		}
 		
-		return product.get();
+		return productOpt.get();
+	}
+	
+	public Product findByName(String name) {
+		Product productOpt = productRepository.findByName(name);
+		return productOpt;
 	}
 	
 	public List<Product> findByUser(User user){
+		
 		return productRepository.findByUser(user);
 		
+	}
+
+	public List<Product> findByPublished() {
+		return productRepository.findByPublished(true);
 	}
 	
 }

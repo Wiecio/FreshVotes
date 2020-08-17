@@ -9,4 +9,6 @@ import com.freshVotes.domain.User;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	List<Product> findByUser(User user);
+	Product findByName(String name);
+	List<Product> findByPublished(Boolean published );
 }

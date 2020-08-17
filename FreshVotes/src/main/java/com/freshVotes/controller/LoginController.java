@@ -1,6 +1,6 @@
 package com.freshVotes.controller;
 
-import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class LoginController {
 		return "register";
 	}
 	@PostMapping("/register")
-	String registerPost(User user,HttpServletResponse response,ModelMap model) {
+	String registerPost(User user,ModelMap model) {
 		try {
 		userService.create(user);
 		}
