@@ -10,6 +10,7 @@ import com.freshVotes.dao.FeatureRepository;
 import com.freshVotes.dao.ProductRepository;
 import com.freshVotes.domain.Feature;
 import com.freshVotes.domain.Product;
+import com.freshVotes.domain.User;
 
 import javassist.NotFoundException;
 
@@ -18,15 +19,20 @@ public class FeatureService {
 	@Autowired FeatureRepository featureRepository;
 	@Autowired ProductRepository productRepository;
 	
-	public Feature createFeature(Long productId) throws NotFoundException {
+	public Feature createFeature(Long productId, User user) throws NotFoundException {
 		Feature feature = new Feature();
 		Product product;
 		Optional<Product> productOpt = productRepository.findById(productId);
 		if(productOpt.isPresent()) {
 			product = productOpt.get();
+			feature.setStatus("pending");
+			
 			feature.setProduct(product);
-			feature.setStatus("pending review");
 			product.getFeatures().add(feature);
+			
+			feature.setUser(user);
+			user.getFeatures().add(feature);
+			
 			feature = featureRepository.save(feature);
 			
 		}else {

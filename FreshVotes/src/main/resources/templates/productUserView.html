@@ -22,7 +22,7 @@
 									style="margin-top: 1em;" th:text="${feature.status}"></span>
 							</h5>
 							<p class="card-text" th:text="${feature.description}">Desciption</p>
-							<div th:if="${#authentication.name} == ${product.user.username}">
+							<div th:if="${#authentication.name} == ${feature.user.username}">
 								<a
 									th:href=@{/products/{productId}/features/{featureId}(productId=${feature.product.id},featureId=${feature.id})}
 									class="card-link">Edit</a>

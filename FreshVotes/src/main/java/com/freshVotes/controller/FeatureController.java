@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.freshVotes.domain.Feature;
 import com.freshVotes.domain.Product;
+import com.freshVotes.domain.User;
 import com.freshVotes.service.FeatureService;
 import com.freshVotes.service.ProductService;
 
@@ -55,7 +57,8 @@ public class FeatureController {
 		return "feature";
 	}
 	@PostMapping("/{featureId}")
-	public String updateFeature(@PathVariable Long featureId, Feature feature) {
+	public String updateFeature(@AuthenticationPrincipal User user,@PathVariable Long featureId, Feature feature) {
+		feature.setUser(user);
 		feature = featureService.save(feature);
 		String productName = feature.getProduct().getName(); 
 		try {
@@ -69,10 +72,10 @@ public class FeatureController {
 	}
 	
 	@PostMapping("/")
-	public String createFeature(@PathVariable Long productId,HttpServletResponse response) throws IOException {
+	public String createFeature(@AuthenticationPrincipal User user, @PathVariable Long productId,HttpServletResponse response) throws IOException {
 		Feature feature = new Feature();
 		try {
-		feature = featureService.createFeature(productId);
+		feature = featureService.createFeature(productId, user);
 		}catch(NotFoundException ex) {
 			System.err.println(ex.getMessage());
 			response.sendError(HttpServletResponse.SC_NOT_FOUND,ex.getMessage());

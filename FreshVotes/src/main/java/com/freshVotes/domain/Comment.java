@@ -1,30 +1,43 @@
 package com.freshVotes.domain;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
 public class Comment {
 
-	@EmbeddedId
-	private CommentId pk;
+	@Id
+	private Long id;
 	@Column(length = 5000)
 	private String text;
+	@ManyToOne
+	private User user;
+	@ManyToOne
+	private Feature feature;
 	
 	
-	public Comment(CommentId pk, String text) {
-		super();
-		this.pk = pk;
-		this.text = text;
-		
+	
+	
+	public Long getId() {
+		return id;
 	}
-	public CommentId getPk() {
-		return pk;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public void setPk(CommentId pk) {
-		this.pk = pk;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Feature getFeature() {
+		return feature;
+	}
+	public void setFeature(Feature feature) {
+		this.feature = feature;
 	}
 	public String getText() {
 		return text;
