@@ -48,7 +48,9 @@ public class FeatureController {
 	@GetMapping("/{featureId}")
 	public String getFeature(@PathVariable Long featureId,ModelMap model,HttpServletResponse response) throws IOException {
 		try {
-			model.put("feature",featureService.findById(featureId));
+			Feature feature = featureService.findById(featureId);
+			model.put("feature", feature);
+			model.put("comments", feature.getComments());
 		} catch (NotFoundException ex) {
 			System.err.println(ex.getMessage());
 			response.sendError(HttpServletResponse.SC_NOT_FOUND,ex.getMessage());

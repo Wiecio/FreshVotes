@@ -40,6 +40,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/").permitAll()
 			.antMatchers("/register").permitAll()
 			.antMatchers("/products").permitAll()
+			.antMatchers("/products/{productId}/features/{featureId}").permitAll()
 			.antMatchers("/p/{productName}").permitAll()
 			.antMatchers("/admin/**").hasRole("ADMIN")			
 			.anyRequest().hasRole("USER")

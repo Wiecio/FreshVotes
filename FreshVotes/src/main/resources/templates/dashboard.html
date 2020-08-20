@@ -18,8 +18,9 @@
 			<div class="row" style="margin-top:-2em;">
 				<h2>Your Products</h2>
 			</div>			
-			<div  class="row" th:each = "product: ${products}">			
-				<a th:href="@{/products/{productId}(productId=${product.id})}" th:text="${product.name}"></a>							
+			<div  class="row" th:each = "product: ${products}">	
+				<h4><a th:text="${product.name}" th:href="@{/p/{productName}(productName=${product.name})}"></a></h4>		
+				<a th:href="@{/products/{productId}(productId=${product.id})}" class="col-auto">Edit</a>							
 			</div>
 	
 		</div>
