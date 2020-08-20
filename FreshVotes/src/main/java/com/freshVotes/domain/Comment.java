@@ -1,26 +1,56 @@
 package com.freshVotes.domain;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 
 @Entity
 public class Comment {
 
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 5000)
 	private String text;
+	private Date createdDate;
 	@ManyToOne
 	private User user;
 	@ManyToOne
 	private Feature feature;
+	@ManyToOne @JoinColumn(name="comment_id",nullable=true)
+	private Comment comment;
+	@OneToMany(mappedBy="comment")
+	private List<Comment> comments = new ArrayList<>();
 	
 	
-	
-	
+	public Date getCreation_date() {
+		return createdDate;
+	}
+	public void setCreation_date(Date creation_date) {
+		this.createdDate = creation_date;
+	}
+	public Comment getComment() {
+		return comment;
+	}
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	public Long getId() {
 		return id;
 	}
