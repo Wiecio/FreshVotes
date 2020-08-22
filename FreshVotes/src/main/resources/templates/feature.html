@@ -40,9 +40,19 @@
 				
 				<h2>Comments</h2>
 				<div th:each="comment:${comments}">
-					<span th:text="${comment.text}"></span>
+				
 				
 				</div>
+				<form action="comments" method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}">
+					<div class="form-group">
+						<label for="commentArea" class="col-form-label">Leave a Comment:</label>
+						<textarea class="form-control"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary btn-lg">Add a Comment</button>
+				</form>
+				
 				
 			</div>
 		</div>
